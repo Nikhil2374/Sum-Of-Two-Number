@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎮 Add Numbers - Powered by Nikhil Kumar</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0f0f0f;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    p.description {
+      font-size: 1rem;
+      color: #888;
+      margin-bottom: 40px;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    input {
+      background-color: #1a1a1a;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      padding: 12px;
+      margin: 10px;
+      width: 100px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #00ffcc;
+      border: none;
+      color: #0f0f0f;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00ffcc;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0ff;
+      box-shadow: 0 0 20px #0ff;
+    }
+
+    .result {
+      margin-top: 25px;
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      color: #444;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer span {
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💻 Giga Add Console</h1>
+  <p class="description">An ultra-fast, gaming-themed number cruncher. Built for speed. Runs on Java Spring Boot engine. 🔥</p>
+
+  <input type="number" id="num1" placeholder="Enter A">
+  <input type="number" id="num2" placeholder="Enter B">
+  <br>
+  <button onclick="addNumbers()">Get Sum</button>
+
+  <div class="result" id="result"></div>
+
+  <footer>
+    Made with 💖 by <span>Nikhil Kumar</span>
+  </footer>
+
+  <script>
+    async function addNumbers() {
+      const a = document.getElementById('num1').value;
+      const b = document.getElementById('num2').value;
+
+      if (a === '' || b === '') {
+        alert('Please enter both numbers.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`http://localhost:8080/api/add?a=${a}&b=${b}`);
+        const data = await response.json();
+        document.getElementById('result').innerText = `🧠 Sum: ${data.sum}`;
+      } catch (error) {
+        document.getElementById('result').innerText = '❌ Error connecting to API.';
+      }
+    }
+  </script>
+
+</body>
+</html>
