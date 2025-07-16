@@ -1,0 +1,11 @@
+# .render.yaml
+services:
+  - type: web
+    name: sum-of-two-number
+    env: java
+    region: oregon
+    plan: free
+    branch: main
+    rootDir: Backend/add-api
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/*.jar
